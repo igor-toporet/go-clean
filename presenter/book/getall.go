@@ -22,11 +22,14 @@ func (p GetAllBooksPresenter) Present(o book.GetAllBooksOut) {
 	w := p.w
 
 	if err != nil {
-		w.Write([]byte(err.Error()))
+
 		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+
 	} else {
 
 		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
 
 		resp := make(map[string]any)
 		resp["status"] = http.StatusOK
@@ -37,7 +40,5 @@ func (p GetAllBooksPresenter) Present(o book.GetAllBooksOut) {
 		if err != nil {
 			log.Fatalf("Error happened in JSON marshal. Err: %s", err)
 		}
-
-		w.WriteHeader(http.StatusOK)
 	}
 }
