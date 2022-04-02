@@ -7,8 +7,8 @@ import (
 
 	_ "github.com/lib/pq"
 
+	"toporet/hop/goclean/bootstrap"
 	"toporet/hop/goclean/controller"
-	"toporet/hop/goclean/usecase/book"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	getAll := book.Bootstrap(db)
+	getAll := bootstrap.Book(db)
 
 	mux.HandleFunc("/books", controller.Books(getAll))
 

@@ -2,27 +2,50 @@ package book
 
 import (
 	"toporet/hop/goclean/entity"
+	"toporet/hop/goclean/usecase"
 )
+
+type GetAllBooksUseCase struct {
+	bookStore BookStore
+	presenter Presenter
+}
+
+func NewGetAllBooksUseCase(
+	s BookStore,
+	p Presenter,
+) GetAllBooksUseCase {
+	return GetAllBooksUseCase{s, p}
+}
+
+func (u GetAllBooksUseCase) Handle(in GetAllBooksIn) {
+	//
+	// potentially more IO interactions and business logic here
+	//
+	b, e := u.bookStore.RetrieveAll()
+
+	u.presenter.Present(GetAllBooksOut{b, e})
+}
+
+type GetAllBooksIn struct {
+}
+
+type Presenter interface {
+	usecase.Presenter[GetAllBooksOut]
+}
 
 type BookStore interface {
 	RetrieveAll() ([]entity.Book, error)
 }
 
-type GetAllBooksUseCase struct {
-	bookStore BookStore
+type GetAllBooksOut struct {
+	books []entity.Book
+	err   error
 }
 
-func NewGetAllBooksUseCase(s BookStore) GetAllBooksUseCase {
-	return GetAllBooksUseCase{s}
+func (o GetAllBooksOut) Books() []entity.Book {
+	return o.books
 }
 
-func (u GetAllBooksUseCase) GetAllBooks(
-//
-// pass an input model later
-//
-) ([]entity.Book, error) {
-	//
-	// potentially more IO interactions and business logic here
-	//
-	return u.bookStore.RetrieveAll()
+func (o GetAllBooksOut) Err() error {
+	return o.err
 }
