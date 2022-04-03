@@ -29,9 +29,7 @@ func (u GetAllBooksUseCase) Handle(in GetAllBooksIn) {
 type GetAllBooksIn struct {
 }
 
-type Presenter interface {
-	usecase.Presenter[GetAllBooksOut]
-}
+type Presenter = usecase.Presenter[GetAllBooksOut]
 
 type BookStore interface {
 	RetrieveAll() ([]entity.Book, error)

@@ -1,27 +1,19 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
-	"toporet/hop/goclean/presenter/book"
 	. "toporet/hop/goclean/usecase/book"
 )
 
-// type GetAllBooksFactory func {
-// 	UseCaseFactory[GetAllBooksIn, GetAllBooksOut, GetAllBooksUseCase, book.GetAllBooksPresenter]
-// }
+type GetAllBooksFactory = UseCaseFactory[GetAllBooksUseCase]
 
-func Books(f UseCaseFactory[GetAllBooksIn, GetAllBooksOut, GetAllBooksUseCase, book.GetAllBooksPresenter]) http.HandlerFunc {
+func Books(f GetAllBooksFactory) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch strings.ToUpper(r.Method) {
 		case http.MethodGet:
 
-			u, p := f(w, r)
-
-			getAll(u)
-
-			fmt.Printf("Presenter: %v", p)
+			getAll(w, r, f)
 
 		default:
 			http.NotFound(w, r)
@@ -29,6 +21,10 @@ func Books(f UseCaseFactory[GetAllBooksIn, GetAllBooksOut, GetAllBooksUseCase, b
 	}
 }
 
-func getAll(u GetAllBooksUseCase) {
+func getAll(w http.ResponseWriter, r *http.Request, f GetAllBooksFactory) {
+	//
+	// TODO: map request to use case input in other more complex use cases
+	//
+	u := f(w, r)
 	u.Handle(GetAllBooksIn{})
 }

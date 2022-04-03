@@ -11,10 +11,10 @@ import (
 	. "toporet/hop/goclean/usecase/book"
 )
 
-func Book(db *sql.DB) controller.UseCaseFactory[GetAllBooksIn, GetAllBooksOut, GetAllBooksUseCase, GetAllBooksPresenter] {
-	return func(w http.ResponseWriter, r *http.Request) (GetAllBooksUseCase, GetAllBooksPresenter) {
+func Book(db *sql.DB) controller.GetAllBooksFactory {
+	return func(w http.ResponseWriter, r *http.Request) GetAllBooksUseCase {
 		bookStore := gateway.NewBookStore(db)
 		prsntr := NewGetAllBooksPresenter(w)
-		return NewGetAllBooksUseCase(bookStore, prsntr), prsntr
+		return NewGetAllBooksUseCase(bookStore, prsntr)
 	}
 }
