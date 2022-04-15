@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "golang.go",
+        "humao.rest-client",
+        "ms-ossdata.vscode-postgresql",
+    ]
+}

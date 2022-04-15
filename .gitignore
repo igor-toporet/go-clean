@@ -15,5 +15,4 @@
 # vendor/
 
 # Binaries
-__debug_bin
 goclean

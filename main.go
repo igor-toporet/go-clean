@@ -4,16 +4,18 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/lib/pq"
 
 	"toporet/hop/goclean/bootstrap"
-	"toporet/hop/goclean/controller"
+	"toporet/hop/goclean/controller/task"
 )
 
 func main() {
-	db, err := sql.Open("postgres",
-		"postgres://postgres:Password1@localhost/bookstore?sslmode=disable")
+
+	connStr := os.Getenv("DB_CONNECTION_STRING")
+	db, err := sql.Open("postgres", connStr)
 
 	if err != nil {
 		log.Fatal(err)
@@ -21,9 +23,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	getAll := bootstrap.Book(db)
+	createTask := bootstrap.Task(db)
 
-	mux.HandleFunc("/books", controller.Books(getAll))
+	mux.HandleFunc("/tasks", task.Handle(createTask))
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }

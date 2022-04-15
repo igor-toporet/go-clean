@@ -1,0 +1,56 @@
+### Valid request
+
+POST http://localhost:8080/tasks
+content-type: application/json
+
+{
+    "name": "second task"
+}
+
+### Valid payload but violates business rules => 400 Bad Request
+
+POST http://localhost:8080/tasks
+content-type: application/json
+
+{
+    "name": " "
+}
+
+
+### Invalid request (missing content-type)
+
+POST http://localhost:8080/tasks
+
+
+### Invalid request (invalid content-type)
+
+POST http://localhost:8080/tasks
+content-type: text/html
+
+
+### Invalid request (missing body)
+
+POST http://localhost:8080/tasks
+content-type: application/json
+
+
+### Invalid request (invalid payload)
+
+POST http://localhost:8080/tasks
+content-type: application/json
+
+{
+    "foo": "bar",
+    "hi": 123
+}
+
+
+### Invalid request (malformed JSON)
+
+POST http://localhost:8080/tasks
+content-type: application/json
+
+{
+    "foo: ["bar",
+    "hi": 123}
+}
