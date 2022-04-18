@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"toporet/hop/goclean/entity"
+	"toporet/hop/goclean/pkg/entity"
 )
 
 // type IGetAllBooks func() ([]entity.Book, error)
@@ -36,7 +36,7 @@ func (s *TaskStore) SaveNewTask(t *entity.Task) (*entity.TaskId, error) {
 
 	taskId, err := entity.NewTaskId(fmt.Sprint(lastInsertId))
 
-	return taskId, nil
+	return taskId, err
 }
 
 func (s *TaskStore) SaveTask(t *entity.Task) error {

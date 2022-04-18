@@ -2,9 +2,9 @@ package task
 
 import (
 	"net/http"
-	"toporet/hop/goclean/controller"
-	"toporet/hop/goclean/controller/parser"
-	"toporet/hop/goclean/usecase/task/create"
+	"toporet/hop/goclean/cmd/web/controller"
+	"toporet/hop/goclean/cmd/web/controller/parser"
+	"toporet/hop/goclean/pkg/usecase/task/create"
 )
 
 type payload struct {

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"toporet/hop/goclean/usecase/task/create"
+	"toporet/hop/goclean/pkg/usecase/task/create"
 )
 
 type CreateTaskPresenter struct {
@@ -19,19 +19,19 @@ func NewCreateTaskPresenter(w http.ResponseWriter) *CreateTaskPresenter {
 func (p *CreateTaskPresenter) Present(o create.CreateTaskOut) {
 	w := p.w
 
-	statusCode, err, taskId := func() (int, error, *string) {
+	statusCode, taskId, err := func() (int, *string, error) {
 		t, err := o.TaskId()
 		if err == nil {
-			return http.StatusCreated, nil, t
+			return http.StatusCreated, t, nil
 		}
 		if o.IsInputError(err) {
-			return http.StatusBadRequest, err, nil
+			return http.StatusBadRequest, nil, err
 		}
 		if o.IsDbGatewayError(err) {
-			return http.StatusBadGateway, err, nil
+			return http.StatusBadGateway, nil, err
 			// or http.StatusInternalServerError
 		}
-		return http.StatusInternalServerError, err, nil
+		return http.StatusInternalServerError, nil, err
 		// or panic("I don't know how to present this use case output")
 	}()
 

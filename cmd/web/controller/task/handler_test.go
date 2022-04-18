@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	"toporet/hop/goclean/entity"
-	presenter "toporet/hop/goclean/presenter/task"
-	uc "toporet/hop/goclean/usecase/task/create"
+	presenter "toporet/hop/goclean/cmd/web/presenter/task"
+	"toporet/hop/goclean/pkg/entity"
+	uc "toporet/hop/goclean/pkg/usecase/task/create"
 
 	"gotest.tools/assert"
 )

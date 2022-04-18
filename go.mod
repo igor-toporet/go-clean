@@ -10,5 +10,5 @@ require (
 require (
 	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/exp v0.0.0-20220407100705-7b9b53b0aca4
+	golang.org/x/exp v0.0.0-20220414153411-bcd21879b8fd
 )

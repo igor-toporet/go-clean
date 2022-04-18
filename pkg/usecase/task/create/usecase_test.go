@@ -3,7 +3,7 @@ package create
 import (
 	"errors"
 	"testing"
-	"toporet/hop/goclean/entity"
+	"toporet/hop/goclean/pkg/entity"
 
 	"gotest.tools/assert"
 )
@@ -58,4 +58,5 @@ func TestHandle_Success(t *testing.T) {
 	out := p.Received()
 	tid, err := out.TaskId()
 	assert.Check(t, *tid == id.String())
+	assert.NilError(t, err)
 }

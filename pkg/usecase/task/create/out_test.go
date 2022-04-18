@@ -3,7 +3,7 @@ package create
 import (
 	"errors"
 	"testing"
-	"toporet/hop/goclean/entity"
+	"toporet/hop/goclean/pkg/entity"
 
 	"gotest.tools/assert"
 )

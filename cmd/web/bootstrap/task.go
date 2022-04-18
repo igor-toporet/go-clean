@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"net/http"
 
-	controller "toporet/hop/goclean/controller/task"
-	presenter "toporet/hop/goclean/presenter/task"
+	controller "toporet/hop/goclean/cmd/web/controller/task"
+	presenter "toporet/hop/goclean/cmd/web/presenter/task"
 
-	"toporet/hop/goclean/gateway"
-	"toporet/hop/goclean/usecase/task/create"
+	"toporet/hop/goclean/pkg/gateway"
+	"toporet/hop/goclean/pkg/usecase/task/create"
 )
 
 func Task(db *sql.DB) controller.CreateTaskUseCaseFactory {

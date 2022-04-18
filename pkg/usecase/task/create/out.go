@@ -1,6 +1,6 @@
 package create
 
-import "toporet/hop/goclean/entity"
+import "toporet/hop/goclean/pkg/entity"
 
 type out struct {
 	taskId      *string

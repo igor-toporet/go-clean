@@ -1,8 +1,8 @@
 package create
 
 import (
-	"toporet/hop/goclean/entity"
-	"toporet/hop/goclean/usecase"
+	"toporet/hop/goclean/pkg/entity"
+	"toporet/hop/goclean/pkg/usecase"
 )
 
 type presenter usecase.Presenter[CreateTaskOut]

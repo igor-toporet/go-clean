@@ -5,11 +5,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"toporet/hop/goclean/cmd/web/bootstrap"
+	"toporet/hop/goclean/cmd/web/controller/task"
 
 	_ "github.com/lib/pq"
-
-	"toporet/hop/goclean/bootstrap"
-	"toporet/hop/goclean/controller/task"
 )
 
 func main() {

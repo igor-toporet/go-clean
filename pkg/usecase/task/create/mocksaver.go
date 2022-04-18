@@ -1,7 +1,7 @@
 package create
 
 import (
-	"toporet/hop/goclean/entity"
+	"toporet/hop/goclean/pkg/entity"
 )
 
 type MockNewTaskSaver struct {
