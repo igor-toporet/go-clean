@@ -4,13 +4,18 @@ import (
 	"errors"
 	"testing"
 	"toporet/hop/goclean/pkg/entity"
+	"toporet/hop/goclean/pkg/usecase"
 
 	"gotest.tools/assert"
 )
 
-func makeUseCase() (*CreateTaskUseCase, *MockNewTaskSaver, *MockPresenter) {
+func makeUseCase() (
+	*CreateTaskUseCase,
+	*MockNewTaskSaver,
+	*usecase.MockPresenter[CreateTaskOut],
+) {
 	s := &MockNewTaskSaver{}
-	p := &MockPresenter{}
+	p := &usecase.MockPresenter[CreateTaskOut]{}
 	uc := NewCreateTaskUseCase(s, p)
 
 	return &uc, s, p

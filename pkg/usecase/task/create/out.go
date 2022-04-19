@@ -2,16 +2,16 @@ package create
 
 import "toporet/hop/goclean/pkg/entity"
 
-type out struct {
-	taskId      *string
-	inputErr    error
-	databaseErr error
-}
-
 type CreateTaskOut interface {
 	TaskId() (*string, error)
 	IsDbGatewayError(e error) bool
 	IsInputError(e error) bool
+}
+
+type out struct {
+	taskId      *string
+	inputErr    error
+	databaseErr error
 }
 
 func NewCreateTaskOutSuccess(id *entity.TaskId) CreateTaskOut {

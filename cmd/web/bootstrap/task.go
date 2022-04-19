@@ -9,14 +9,23 @@ import (
 
 	"toporet/hop/goclean/pkg/gateway"
 	"toporet/hop/goclean/pkg/usecase/task/create"
+	"toporet/hop/goclean/pkg/usecase/task/getall"
 )
 
-func Task(db *sql.DB) controller.CreateTaskUseCaseFactory {
+func Task(
+	db *sql.DB,
+) (
+	controller.CreateTaskUseCaseFactory,
+	controller.GetAllTasksUseCaseFactory,
+) {
+	store := gateway.NewTaskStore(db)
+
 	return func(w http.ResponseWriter, r *http.Request) create.CreateTaskUseCase {
-		store := gateway.NewTaskStore(db)
 
-		ucCreate := create.NewCreateTaskUseCase(store, presenter.NewCreateTaskPresenter(w))
+			return create.NewCreateTaskUseCase(store, presenter.NewCreateTaskPresenter(w))
 
-		return ucCreate // , TODO: return more use case factories
-	}
+		}, func(w http.ResponseWriter, r *http.Request) getall.GetAllTasksUseCase {
+
+			return getall.NewGetAllTasksUseCase(store, presenter.NewGetAllTasksPresenter(w))
+		}
 }

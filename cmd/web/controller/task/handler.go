@@ -6,10 +6,8 @@ import (
 )
 
 func Handle(
-
 	f CreateTaskUseCaseFactory,
-
-	// TODO: more use case factories
+	g GetAllTasksUseCaseFactory,
 
 ) http.HandlerFunc {
 
@@ -18,6 +16,14 @@ func Handle(
 		case http.MethodPost:
 
 			f.create(w, r)
+
+		case http.MethodGet:
+
+			if r.URL.Path == "/tasks/" {
+				g.getAll(w, r)
+				break
+			}
+			fallthrough
 
 		default:
 			http.NotFound(w, r)

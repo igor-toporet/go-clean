@@ -22,9 +22,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	createTask := bootstrap.Task(db)
+	createTask, getAllTasks := bootstrap.Task(db)
 
-	mux.HandleFunc("/tasks", task.Handle(createTask))
+	mux.HandleFunc("/tasks/", task.Handle(createTask, getAllTasks))
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }

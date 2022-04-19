@@ -15,6 +15,12 @@ type CreateTaskUseCaseFactory controller.UseCaseFactory[create.CreateTaskUseCase
 
 func (f CreateTaskUseCaseFactory) create(w http.ResponseWriter, r *http.Request) {
 
+	toUseCaseInput := func(p payload) (*create.CreateTaskIn, error) {
+		in, err := create.NewCreateTaskIn(p.Name)
+
+		return &in, err
+	}
+
 	in, err := parser.ParseAndTranslate(r, toUseCaseInput)
 
 	if err != nil {
@@ -24,10 +30,4 @@ func (f CreateTaskUseCaseFactory) create(w http.ResponseWriter, r *http.Request)
 
 	uc := f(w, r)
 	uc.Handle(*in)
-}
-
-func toUseCaseInput(p payload) (*create.CreateTaskIn, error) {
-	in, err := create.NewCreateTaskIn(p.Name)
-
-	return &in, err
 }
