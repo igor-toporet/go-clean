@@ -8,7 +8,7 @@ import (
 
 type GetAllTasksUseCaseFactory controller.UseCaseFactory[getall.GetAllTasksUseCase]
 
-func (f GetAllTasksUseCaseFactory) getAll(w http.ResponseWriter, r *http.Request) {
+func (f GetAllTasksUseCaseFactory) handle(w http.ResponseWriter, r *http.Request) {
 
 	in := getall.NewGetAllTasksIn()
 

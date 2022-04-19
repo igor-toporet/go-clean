@@ -13,7 +13,7 @@ type payload struct {
 
 type CreateTaskUseCaseFactory controller.UseCaseFactory[create.CreateTaskUseCase]
 
-func (f CreateTaskUseCaseFactory) create(w http.ResponseWriter, r *http.Request) {
+func (f CreateTaskUseCaseFactory) handle(w http.ResponseWriter, r *http.Request) {
 
 	toUseCaseInput := func(p payload) (*create.CreateTaskIn, error) {
 		in, err := create.NewCreateTaskIn(p.Name)

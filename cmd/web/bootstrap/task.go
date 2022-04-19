@@ -14,18 +14,23 @@ import (
 
 func Task(
 	db *sql.DB,
-) (
-	controller.CreateTaskUseCaseFactory,
-	controller.GetAllTasksUseCaseFactory,
+	mux *http.ServeMux,
 ) {
 	store := gateway.NewTaskStore(db)
 
-	return func(w http.ResponseWriter, r *http.Request) create.CreateTaskUseCase {
+	create := func(w http.ResponseWriter, r *http.Request) create.CreateTaskUseCase {
+		return create.NewCreateTaskUseCase(store, presenter.NewCreateTaskPresenter(w))
+	}
 
-			return create.NewCreateTaskUseCase(store, presenter.NewCreateTaskPresenter(w))
+	getAll := func(w http.ResponseWriter, r *http.Request) getall.GetAllTasksUseCase {
+		return getall.NewGetAllTasksUseCase(store, presenter.NewGetAllTasksPresenter(w))
+	}
 
-		}, func(w http.ResponseWriter, r *http.Request) getall.GetAllTasksUseCase {
-
-			return getall.NewGetAllTasksUseCase(store, presenter.NewGetAllTasksPresenter(w))
-		}
+	mux.HandleFunc(
+		controller.RoutePath,
+		controller.Handle(
+			create,
+			getAll,
+		),
+	)
 }

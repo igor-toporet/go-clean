@@ -5,9 +5,13 @@ import (
 	"strings"
 )
 
+const (
+	RoutePath = "/tasks/"
+)
+
 func Handle(
-	f CreateTaskUseCaseFactory,
-	g GetAllTasksUseCaseFactory,
+	create CreateTaskUseCaseFactory,
+	getAll GetAllTasksUseCaseFactory,
 
 ) http.HandlerFunc {
 
@@ -15,12 +19,12 @@ func Handle(
 		switch strings.ToUpper(r.Method) {
 		case http.MethodPost:
 
-			f.create(w, r)
+			create.handle(w, r)
 
 		case http.MethodGet:
 
-			if r.URL.Path == "/tasks/" {
-				g.getAll(w, r)
+			if r.URL.Path == RoutePath {
+				getAll.handle(w, r)
 				break
 			}
 			fallthrough
