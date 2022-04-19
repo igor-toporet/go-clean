@@ -5,18 +5,19 @@ import (
 	"net/http"
 
 	"toporet/hop/goclean/pkg/entity"
+	"toporet/hop/goclean/pkg/usecase"
 	"toporet/hop/goclean/pkg/usecase/task/getall"
 )
 
-type GetAllTasksPresenter struct {
+type getAllTasksPresenter struct {
 	w http.ResponseWriter
 }
 
-func NewGetAllTasksPresenter(w http.ResponseWriter) *GetAllTasksPresenter {
-	return &GetAllTasksPresenter{w: w}
+func NewGetAllTasksPresenter(w http.ResponseWriter) usecase.Presenter[getall.GetAllTasksOut] {
+	return &getAllTasksPresenter{w: w}
 }
 
-func (p *GetAllTasksPresenter) Present(o getall.GetAllTasksOut) {
+func (p *getAllTasksPresenter) Present(o getall.GetAllTasksOut) {
 	w := p.w
 
 	statusCode, tasks, err := func() (int, []*entity.Task, error) {

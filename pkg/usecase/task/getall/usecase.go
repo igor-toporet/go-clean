@@ -4,16 +4,18 @@ import (
 	"toporet/hop/goclean/pkg/usecase"
 )
 
-type presenter usecase.Presenter[GetAllTasksOut]
+// type presenter usecase.Presenter[GetAllTasksOut]
 
 type GetAllTasksUseCase struct {
-	fetcher   AllTasksFetcher
-	presenter presenter
+	fetcher AllTasksFetcher
+	// presenter presenter
+	presenter usecase.Presenter[GetAllTasksOut]
 }
 
 func NewGetAllTasksUseCase(
 	s AllTasksFetcher,
-	p presenter,
+	// p presenter,
+	p usecase.Presenter[GetAllTasksOut],
 ) GetAllTasksUseCase {
 	return GetAllTasksUseCase{s, p}
 }
