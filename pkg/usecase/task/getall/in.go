@@ -3,9 +3,9 @@ package getall
 type GetAllTasksIn interface {
 }
 
-type getAllTasksIn struct {
+type in struct {
 }
 
 func NewGetAllTasksIn() GetAllTasksIn {
-	return &getAllTasksIn{}
+	return &in{}
 }

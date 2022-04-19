@@ -10,7 +10,7 @@ import (
 )
 
 func makeUseCase() (
-	*CreateTaskUseCase,
+	CreateTaskUseCase,
 	*MockNewTaskSaver,
 	*usecase.MockPresenter[CreateTaskOut],
 ) {
@@ -18,7 +18,7 @@ func makeUseCase() (
 	p := &usecase.MockPresenter[CreateTaskOut]{}
 	uc := NewCreateTaskUseCase(s, p)
 
-	return &uc, s, p
+	return uc, s, p
 }
 
 func TestHandle_InputError(t *testing.T) {

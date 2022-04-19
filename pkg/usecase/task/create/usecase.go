@@ -5,21 +5,23 @@ import (
 	"toporet/hop/goclean/pkg/usecase"
 )
 
-type presenter usecase.Presenter[CreateTaskOut]
+type CreateTaskUseCase usecase.UseCase[CreateTaskIn]
 
-type CreateTaskUseCase struct {
+type Presenter usecase.Presenter[CreateTaskOut]
+
+type uc struct {
 	taskSaver NewTaskSaver
-	presenter presenter
+	presenter Presenter
 }
 
 func NewCreateTaskUseCase(
 	s NewTaskSaver,
-	p presenter,
+	p Presenter,
 ) CreateTaskUseCase {
-	return CreateTaskUseCase{s, p}
+	return &uc{s, p}
 }
 
-func (u *CreateTaskUseCase) Handle(in CreateTaskIn) {
+func (u *uc) Handle(in CreateTaskIn) {
 	out := func() CreateTaskOut {
 		tn, err := entity.NewTaskName(in.TaskName())
 		if err != nil {

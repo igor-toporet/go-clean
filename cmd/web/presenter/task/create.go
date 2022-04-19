@@ -8,15 +8,15 @@ import (
 	"toporet/hop/goclean/pkg/usecase/task/create"
 )
 
-type CreateTaskPresenter struct {
+type createTaskPresenter struct {
 	w http.ResponseWriter
 }
 
-func NewCreateTaskPresenter(w http.ResponseWriter) *CreateTaskPresenter {
-	return &CreateTaskPresenter{w: w}
+func NewCreateTaskPresenter(w http.ResponseWriter) create.Presenter {
+	return &createTaskPresenter{w: w}
 }
 
-func (p *CreateTaskPresenter) Present(o create.CreateTaskOut) {
+func (p *createTaskPresenter) Present(o create.CreateTaskOut) {
 	w := p.w
 
 	statusCode, taskId, err := func() (int, *string, error) {
